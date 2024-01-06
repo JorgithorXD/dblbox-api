@@ -12,4 +12,16 @@ app.get('/', (req, res) => {
     res.send('<h1>HOLA</h1>')
 })
 
+app.get('/home', (req, res) => {
+    res.send('<h1>Pagina principal</h1>')
+})
+
 app.use('/unit', unitRoutes)
+
+app.use((req, res, next)=>{
+    if(req.url === '/') {
+        res.redirect(301, '/home')
+    } else {
+        next()
+    }
+})
