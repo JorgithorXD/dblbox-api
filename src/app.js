@@ -18,7 +18,7 @@ app.get('/home', (req, res) => {
 
 app.use('/unit', unitRoutes)
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     if(req.url === '/') {
         res.redirect(301, '/home')
     } else {
