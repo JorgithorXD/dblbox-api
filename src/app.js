@@ -8,16 +8,6 @@ app.listen(PORT, () => {
     console.log("server listening on https://localhost:" + PORT);
 })
 
-app.get('/', (req, res) => {
-    res.send('<h1>HOLA</h1>')
-})
-
-app.get('/home', (req, res) => {
-    res.send('<h1>Pagina principal</h1>')
-})
-
-app.use('/unit', unitRoutes)
-
 app.use((req, res, next) => {
     if(req.url === '/') {
         res.redirect(301, '/home')
@@ -25,3 +15,9 @@ app.use((req, res, next) => {
         next()
     }
 })
+
+app.get('/home', (req, res) => {
+    res.send('<h1>Pagina principal</h1>')
+})
+
+app.use('/unit', unitRoutes)
