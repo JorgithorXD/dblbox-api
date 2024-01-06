@@ -1,5 +1,6 @@
 import express from 'express'
 import unitRoutes from './routes/unitRoutes.js'
+import dataRoutes from './routes/dataRoutes.js'
 
 const app = express()
 const PORT = process.env.PORT ?? 4121
@@ -21,3 +22,4 @@ app.get('/home', (req, res) => {
 })
 
 app.use('/unit', unitRoutes)
+app.use('/data', dataRoutes)
