@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" name="tagName" id="tagName">
+        <input type="submit" value="Submit" onclick="submitForm(event)">
+    </form>
+</body>
+<script>
+    function submitForm(event) {
+        event.preventDefault()
+        var tagName = document.getElementById("tagName").value
+            fetch('/form/post/tags', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ tagName: tagName })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Solicitud exitosa');
+                } else {
+                    console.error('Error en la solicitud');
+                }
+            })
+            .catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+    }
+</script>
+
+</html>
