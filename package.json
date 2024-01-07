@@ -27,6 +27,7 @@
   "homepage": "https://github.com/JorgithorXD/dblbox-api#readme",
   "dependencies": {
     "express": "4.18.2",
+    "mysql2": "3.6.5",
     "pkg": "^5.8.1"
   }
 }
