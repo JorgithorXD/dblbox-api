@@ -1,9 +1,21 @@
 import express  from "express"
+import { supabase } from "../database/supabase.js"
 
 const router = express.Router()
 
-router.get('/tags', (req, res)=>{
-    res.send('<h1>TODOS LOS TAGs</h1>')
+router.get('/tags', async (req, res)=>{
+    try {
+        const { data, error } = await supabase.from('data_tags').select('*');
+    
+        if (error) {
+          throw error;
+        }
+    
+        res.status(200).json(data);
+      } catch (error) {
+        console.error('Error al obtener datos de Supabase:', error);
+        res.status(500).json({ error: 'Error al obtener datos de Supabase' });
+      }
 })
 
 router.get('/chapters', (req, res)=>{
