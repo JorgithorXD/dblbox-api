@@ -1,26 +1,18 @@
-import mysql from 'mysql2/promise'
+import { supabase } from '../database/supabase.js'
 
-const config = {
-    host: 'localhost',
-    user: 'root',
-    port: 3306,
-    password: '',
-    database: 'dbl',
-}
+const insertBasicUnit = async (table, data) => {
+    const { data, error } = await supabase
+        .from(table)
+        .upsert(data)
 
-const postTo = async (query, params=[]) => {
-    try {
-        const connection = await mysql.createConnection(config)
-        const [results] = await connection.query(query, params=[])
-
-        connection.end()
-        return results
+    if (error) {
+        console.error('Error inserting unit:', error.message)
+        return;
     }
-    catch (error) {
-        console.log('Error al subir el tag, error: ' + error)
-    }
+
+    console.log('Unit inserted successfully:', data);
 }
 
 export {
-    postTo
+    insertBasicUnit
 }

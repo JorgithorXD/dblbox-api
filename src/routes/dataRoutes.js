@@ -1,5 +1,4 @@
 import express from "express"
-import { supabase } from "../database/supabase.js"
 import { getData } from "../controllers/getData.js"
 
 const router = express.Router()

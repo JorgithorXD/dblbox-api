@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit form</title>
+</head>
+
+<body>
+    <main>
+        <form>
+            <input type="text" name="unit_id" id="unit_id">
+            <input type="text" name="unit_name" id="unit_name">
+            <input type="text" name="unit_type" id="unit_type">
+            <label>Tag:</label>
+            <div id="options-container"></div>
+            <p>Seleccionadas: <span id="selected-options"></span></p>
+        </form>
+    </main>
+</body>
+
+<script>
+    const optionsContainer = document.getElementById('options-container');
+    const selectedOptionsSpan = document.getElementById('selected-options');
+    let selectedNames = []
+    var selectedIds = []
+    var selectedIdsString
+
+    fetch('/data/tags')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(tag => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.innerHTML = `
+            <input type="checkbox" id="option-${tag.tag_id}" data-id="${tag.tag_id}" data-name="${tag.tag_name}">
+            <label for="option-${tag.tag_id}">${tag.tag_name}</label>
+        `;
+                optionElement.addEventListener('change', handleOptionChange);
+                optionsContainer.appendChild(optionElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
+
+    function handleOptionChange(event) {
+        const optionId = parseInt(event.target.dataset.id, 10);
+        const optionName = event.target.dataset.name;
+
+        if (event.target.checked) {
+            selectedIds.push(optionId);
+            selectedNames.push(optionName);
+        } else {
+            const index = selectedIds.indexOf(optionId);
+            if (index !== -1) {
+                selectedIds.splice(index, 1);
+                selectedNames.splice(index, 1);
+            }
+        }
+
+        selectedOptionsSpan.textContent = selectedNames.join(', ');
+        selectedIdsString = selectedIds.join(',');
+    }
+</script>
+
+</html>

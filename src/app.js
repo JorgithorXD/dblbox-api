@@ -4,7 +4,8 @@ import unitRoutesEs from './routes/unitRoutesEs.js'
 import unitRoutesJp from './routes/unitRoutesJp.js'
 import unitRoutesFr from './routes/unitRoutesFr.js'
 import dataRoutes from './routes/dataRoutes.js'
-import formRoutes from './routes/formRoutes.js'
+import formDataRoutes from './routes/formDataRoutes.js'
+import formUnitRoutes from './routes/formUnitRoutes.js'
 
 const app = express()
 const PORT = process.env.PORT ?? 4121
@@ -33,4 +34,5 @@ app.use('/es/unit', unitRoutesEs)
 app.use('/jp/unit', unitRoutesJp)
 app.use('/fr/unit', unitRoutesFr)
 app.use('/data', dataRoutes)
-app.use('/form', formRoutes)
+app.use('/form', formDataRoutes)
+app.use('/form', formUnitRoutes)
