@@ -77,7 +77,7 @@ router.post('/post/unit', async (req, res) => {
         await insertBasicUnit('unit_zenkai', unitModel.unit_zenkai)
         await insertBasicUnit('unit_arts_zenkai', unitModel.arts_zenkai)
 
-        res.send('Datos recibidos correctamente.')
+        res.sendFile(join(__dirname, '../public/forms/unitForm.html'))
     } catch (error) {
         console.error('Error en el manejo de la solicitud:', error);
         res.status(500).send('Error interno del servidor');
