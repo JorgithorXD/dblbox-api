@@ -14,27 +14,29 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/auth/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body 
 
     try {
         const result = await supabase.auth.signInWithPassword({
             email: email,
             password: password
-        });
+        }) 
         if (result.data.user && result.data.session) {
-             const token = jwt.sign({ email, id: result.data.user.id }, secretKey, { expiresIn: '2h' });
+             const token = jwt.sign({ email, id: result.data.user.id }, secretKey, { expiresIn: '2h' }) 
 
-            res.cookie('token', token, { httpOnly: true });
+            res.cookie('token', token, { httpOnly: true }) 
 
-            // Utiliza res.redirect sin res.status(200).end()
-            res.redirect('/home');
+            const redirectPath = req.cookies.redirectPath
+
+            res.clearCookie('redirectPath')
+            res.redirect(redirectPath) 
         } else {
-            res.status(401).json({ error: 'Credenciales inválidas' });
+            res.redirect('/login')
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al iniciar sesión' });
+        console.error(error) 
+        res.status(500).json({ error: 'Error al iniciar sesión' }) 
     }
-});
+}) 
 
 export default router
