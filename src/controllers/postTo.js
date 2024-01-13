@@ -1,7 +1,7 @@
 import { supabase } from '../database/supabase.js'
 
 const insertBasicUnit = async (table, data) => {
-    const { data, error } = await supabase
+    const { result, error } = await supabase
         .from(table)
         .upsert(data)
 
@@ -10,7 +10,7 @@ const insertBasicUnit = async (table, data) => {
         return;
     }
 
-    console.log('Unit inserted successfully:', data);
+    console.log('Unit inserted successfully:', result);
 }
 
 export {

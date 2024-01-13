@@ -49,8 +49,10 @@ router.put('/update/types', (req, res) => {
 })
 
 router.post('/post/tags', (req, res) => {
+    console.log(req.body)
     const tagName = req.body.tagName
     console.log('El tag es: ' + tagName)
+    res.send('Datos recibidos exitosamente');
 })
 
 router.post('/post/chapters', (req, res) => {

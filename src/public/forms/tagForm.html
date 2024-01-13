@@ -8,33 +8,26 @@
 </head>
 
 <body>
-    <form>
+    <form action="/form/post/tags" method="post">
         <input type="text" name="tagName" id="tagName">
-        <input type="submit" value="Submit" onclick="submitForm(event)">
+        <input type="submit" value="Submit">
     </form>
 </body>
 <script>
-    function submitForm(event) {
+   /* const form = document.querySelector('form')
+    form.addEventListener('submit', (event) => {
         event.preventDefault()
-        var tagName = document.getElementById("tagName").value
-            fetch('/form/post/tags', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ tagName: tagName })
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Solicitud exitosa');
-                } else {
-                    console.error('Error en la solicitud');
-                }
-            })
-            .catch(error => {
-                console.error('Error en la solicitud:', error);
-            });
-    }
+
+        const formData = new FormData(form)
+
+        fetch('/form/post/tags', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    })*/
 </script>
 
 </html>

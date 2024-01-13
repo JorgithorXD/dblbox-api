@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import unitRoutes from './routes/unitRoutes.js'
 import unitRoutesEs from './routes/unitRoutesEs.js'
@@ -25,7 +26,8 @@ app.use((req, res, next) => {
     }
 })
 
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.static('./public'))
 
 app.get('/home', (req, res) => {

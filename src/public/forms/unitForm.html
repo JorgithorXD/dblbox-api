@@ -9,49 +9,311 @@
 
 <body>
     <main>
-        <form>
-            <input type="text" name="unit_id" id="unit_id">
-            <input type="text" name="unit_name" id="unit_name">
-            <select type="text" name="unit_type" id="unit_type">
-                <option value="0">Elige un tipo</option>
-            </select>
-            <select type="text" name="unit_color" id="unit_color">
-                <option value="0">Elige un color</option>
-            </select>
-            <select type="text" name="unit_chapter" id="unit_chapter">
-                <option value="0">Elige un capitulo</capituloon>
-            </select>
+        <h1>Formulario para crear una unidad de DBL</h1>
+        <form action="/form/post/unit" method="post">
+            <h2>Datos basicos</h2>
+            <label for="unit_id">Indroduce el id del personaje</label>
+            <input type="text" name="unit_id" id="unit_id" placeholder="Introduce la ID">
+            <div class="basic-unit">
+                <section class="single-unit">
+                    <label for="unit_name">Nombre de la unidad</label>
+                    <input type="text" name="unit_name" id="unit_name" placeholder="Introduce el NOMBRE">
+                    <label for="unit_color">Color de la unidad</label>
+                    <select type="text" name="unit_color" id="unit_color">
+                        <option value="0">Elige un color</option>
+                    </select>
+                </section>
+                <section class="second-unit">
+                    <label for="second_unit_name">Nombre de la segunda unidad</label>
+                    <input type="text" name="second_unit_name" id="unit_name" placeholder="Introduce el NOMBRE">
+                    <label for="second_unit_color">Color de la segunda unidad</label>
+                    <select type="text" name="second_unit_color" id="second_unit_color">
+                        <option value="0">Elige un color</option>
+                    </select>
+                </section>
+            </div>
+            <section class="unit-data">
+                <select type="text" name="unit_chapter" id="unit_chapter">
+                    <option value="0">Elige un capitulo</option>
+                </select>
+                <select type="text" name="unit_rarity" id="unit_rarity">
+                    <option value="0">Elige la rareza</option>
+                </select>
+                <select type="text" name="unit_type" id="unit_type">
+                    <option value="0">Elige un tipo</option>
+                </select>
+            </section>
+            <br>
             <label>Tag:</label>
             <div id="options-container"></div>
+            <input type="hidden" name="selected_tags" id="selected_tags">
             <p>Seleccionadas: <span id="selected-options"></span></p>
+
+            <section class="extra-option">
+                <div class="extra_options tag_switch">
+                    <label>Es tag switch</label>
+                    <input type="checkbox" name="tag_switch" id="extra">
+                </div>
+                <div class="extra_options revival">
+                    <label>Es revival</label>
+                    <input type="checkbox" name="revival" id="extra">
+                </div>
+                <div class="extra_options transformable">
+                    <label>Es transformable</label>
+                    <input type="checkbox" name="transformable" id="extra">
+                </div>
+                <div class="extra_options zenkai">
+                    <label>Tiene zenkai</label>
+                    <input type="checkbox" name="zenkai" id="extra">
+                </div>
+                <div class="extra_options legends_limited">
+                    <label>Es legends limited</label>
+                    <input type="checkbox" name="legends_limited" id="extra">
+                </div>
+                <div class="extra_options awaken">
+                    <label>Tiene awaken</label>
+                    <input type="checkbox" name="awaken" id="extra">
+                </div>
+            </section>
+
+            <h2>Habilidades</h2>
+            <label>Separar con ',' cada habilidad, nombre / habilidad, habilidad / habilidad</label>
+            <section class="abilities">
+                <label for="name">Habilidad Principal</label>
+                <textarea name="main" cols="30" rows="5"></textarea>
+                <label for="ultra">Habilidad Ultra</label>
+                <textarea name="ultra" cols="30" rows="5"></textarea>
+                <label for="z_limited">Habilidad Z Limited</label>
+                <textarea name="z_limited" cols="30" rows="5"></textarea>
+                <label for="z">Habilidad Z</label>
+                <textarea name="z" cols="30" rows="5"></textarea>
+                <label for="unique_1">Habilidad Unica 1</label>
+                <textarea name="unique_1" cols="30" rows="5"></textarea>
+                <label for="unique_2">Habilidad Unica 2</label>
+                <textarea name="unique_2" cols="30" rows="5"></textarea>
+            </section>
+
+            <input type="submit" value="Enviar">
         </form>
     </main>
 </body>
 
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        border: none;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-size: 10px;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin: 0.75rem 0;
+    }
+
+    body {
+        width: calc(100vw - 150px);
+        height: 100dvh;
+        overflow-x: hidden;
+        margin: 0 auto;
+        padding-top: 1rem;
+    }
+
+    div#options-container {
+        width: 100%;
+        gap: 4px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    section.extra-option {
+        display: flex;
+        gap: 4px;
+    }
+
+    div.basic-unit {
+        display: flex;
+        margin: 1rem auto;
+        justify-content: space-around;
+    }
+
+    section.single-unit,
+    section.second-unit {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+        gap: 4px;
+    }
+
+    section.second-unit.active {
+        display: block;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section.second-unit.unactive {
+        display: none;
+    }
+
+    section.unit-data {
+        display: flex;
+        width: 100%;
+        gap: 1rem;
+        margin: 1rem auto;
+    }
+
+    section.abilities {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.option,
+    div.extra_options {
+        display: flex;
+        padding: 0.25rem 1rem;
+        border: 2px black solid;
+        gap: 4px;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        height: 3rem;
+        margin: 0 auto;
+    }
+
+    input:not(input[type=checkbox]),
+    select {
+        width: 100%;
+        height: 3rem;
+        font-size: 1.5rem;
+        border: 2px black solid;
+        padding-left: 10px;
+    }
+
+    label,
+    p {
+        font-size: 1.8rem;
+    }
+
+    textarea {
+        border: 1px solid black;
+        margin-bottom: 1rem;
+    }
+</style>
+
 <script>
-    const optionsContainer = document.getElementById('options-container');
-    const selectedOptionsSpan = document.getElementById('selected-options');
+    const optionsContainer = document.getElementById('options-container')
+    const selectedOptionsSpan = document.getElementById('selected-options')
+    const selectChapter = document.getElementById('unit_chapter')
+    const selectColor = document.getElementById('unit_color')
+    const select2Color = document.getElementById('second_unit_color')
+    const selectType = document.getElementById('unit_type')
+    const selectRarity = document.getElementById('unit_rarity')
+    const selectedTagsInput = document.getElementById('selected_tags')
+    const secondUnit = document.querySelector('.second-unit')
+    var extraOptions = document.querySelectorAll('#extra')
+    extraOptions = Array.from(extraOptions)
+
+    secondUnit.classList.add('unactive')
+
     let selectedNames = []
     var selectedIds = []
     var selectedIdsString
+
+    fetch('/data/colors')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(color => {
+                const option = document.createElement('option')
+                option.value = color.color_id
+                option.text = color.color_name
+                selectColor.appendChild(option)
+            })
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error)
+        })
+    fetch('/data/colors')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(color => {
+                const option = document.createElement('option')
+                option.value = color.color_id
+                option.text = color.color_name
+                select2Color.appendChild(option)
+            })
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error)
+        })
+
+    fetch('/data/chapters')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(chapter => {
+                const option = document.createElement('option')
+                option.value = chapter.chapter_id
+                option.text = chapter.chapter_name
+                selectChapter.appendChild(option)
+            })
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error)
+        })
+
+    fetch('/data/raritys')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(rarity => {
+                const option = document.createElement('option')
+                option.value = rarity.rarity_id
+                option.text = rarity.rarity_name
+                selectRarity.appendChild(option)
+            })
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error)
+        })
+
+    fetch('/data/types')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(type => {
+                const option = document.createElement('option')
+                option.value = type.type_id
+                option.text = type.type_name
+                selectType.appendChild(option)
+            })
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error)
+        })
 
     fetch('/data/tags')
         .then(response => response.json())
         .then(data => {
             data.forEach(tag => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
+                const optionElement = document.createElement('div')
+                optionElement.classList.add('option')
                 optionElement.innerHTML = `
-            <input type="checkbox" id="option-${tag.tag_id}" data-id="${tag.tag_id}" data-name="${tag.tag_name}">
-            <label for="option-${tag.tag_id}">${tag.tag_name}</label>
-        `;
-                optionElement.addEventListener('change', handleOptionChange);
-                optionsContainer.appendChild(optionElement);
-            });
+                <label for="option-${tag.tag_id}">${tag.tag_name}</label>
+                <input type="checkbox" id="option-${tag.tag_id}" data-id="${tag.tag_id}" data-name="${tag.tag_name}">
+        `
+                optionElement.addEventListener('change', handleOptionChange)
+                optionsContainer.appendChild(optionElement)
+            })
         })
         .catch(error => {
-            console.error('Error en la solicitud:', error);
-        });
+            console.error('Error en la solicitud:', error)
+        })
 
     function handleOptionChange(event) {
         const optionId = parseInt(event.target.dataset.id, 10);
@@ -67,10 +329,26 @@
                 selectedNames.splice(index, 1);
             }
         }
-
         selectedOptionsSpan.textContent = selectedNames.join(', ');
         selectedIdsString = selectedIds.join(',');
+        selectedTagsInput.value = selectedIdsString;
     }
+
+    extraOptions.forEach((e, i) => {
+        e.addEventListener('change', () => {
+            const atLeastOneChecked = extraOptions.some(checkbox => checkbox.checked);
+
+            if (atLeastOneChecked) {
+                secondUnit.classList.add('active');
+                secondUnit.classList.remove('unactive');
+            } else {
+
+                secondUnit.classList.remove('active');
+                secondUnit.classList.add('unactive');
+            }
+        });
+    });
+
 </script>
 
 </html>
