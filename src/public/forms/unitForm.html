@@ -93,6 +93,24 @@
                 <textarea name="unique_2" cols="30" rows="5"></textarea>
             </section>
 
+            <h2>Destrezas</h2>
+            <label>Separar con ',' cada efecto, nombre / efecto</label>
+            <section class="arts">
+                <label for="strike">Carta fisica</label>
+                <textarea name="strike" cols="30" rows="5"></textarea>
+                <label for="blast">Carta de energia</label>
+                <textarea name="blast" cols="30" rows="5"></textarea>
+                <label for="special_move">Tecnica especial</label>
+                <textarea name="special_move" cols="30" rows="5"></textarea>
+                <label for="special">Tecnica propia</label>
+                <textarea name="special_art" cols="30" rows="5"></textarea>
+                <label for="ultimate">Definitiva</label>
+                <textarea name="ultimate" cols="30" rows="5"></textarea>
+                <label for="awaken">Despertar</label>
+                <textarea name="awaken" cols="30" rows="5"></textarea>
+            </section>
+
+
             <input type="submit" value="Enviar">
         </form>
     </main>
@@ -170,7 +188,7 @@
         margin: 1rem auto;
     }
 
-    section.abilities {
+    section.abilities, .arts {
         display: flex;
         flex-direction: column;
     }
