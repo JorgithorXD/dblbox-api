@@ -51,8 +51,8 @@ router.post('/post/unit', async (req, res) => {
         unitModel.arts.blast = req.body.blast.split(',').map(m => m.trim())
         unitModel.arts.special_move = req.body.special_move.split(',').map(m => m.trim())
         unitModel.arts.special_art = req.body.special_art.split(',').map(m => m.trim())
-        unitModel.arts.ultimate = req.body.awaken.split(',').map(m => m.trim())
-        unitModel.arts.awaken = req.body.awaken.split(',').map(m => m.trim())
+        unitModel.arts.ultimate = req.body.ultimate.split(',').map(m => m.trim())
+        unitModel.arts.awaken = req.body.awaken_card.split(',').map(m => m.trim())
 
         await insertBasicUnit('unit_basic', unitModel.basic)
         await insertBasicUnit('unit_abilities', unitModel.abilities)
