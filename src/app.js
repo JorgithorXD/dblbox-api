@@ -18,6 +18,18 @@ app.listen(PORT, () => {
     console.log("server listening on https://localhost:" + PORT);
 })
 
+app.use(async function(req, res, next) {
+    const user = supabase.auth.user();
+  
+    if (!user) {
+      // Si el usuario no está autenticado, redirige a la página de inicio de sesión
+      return res.redirect('/login');
+    } else {
+      // Si el usuario está autenticado, permite que la solicitud continúe
+      next();
+    }
+  });
+
 app.use((req, res, next) => {
     if (req.url === '/') {
         res.redirect(301, '/home')

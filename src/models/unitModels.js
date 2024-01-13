@@ -1,12 +1,12 @@
 const basic = {
     id: null,
-    unit_name: [], 
+    unit_name: [],
     unit_type: null,
     unit_rarity: null,
     unit_color: [],
     unit_tag: [],
     unit_chapter: null,
-    unit_img: [], 
+    unit_img: [],
     tag_switch: null,
     revival: null,
     transformable: null,
@@ -16,7 +16,7 @@ const basic = {
 }
 
 const abilities = {
-    id: null, 
+    id: null,
     main_ability: [],
     ultra_ability: [],
     z_limited_ability: [],
@@ -26,7 +26,7 @@ const abilities = {
 }
 
 const arts = {
-    id: null, 
+    id: null,
     strike: [],
     blast: [],
     special_move: [],
@@ -40,7 +40,7 @@ const arts_zenkai = {
 }
 
 const unit_zenkai = {
-    id: null, 
+    id: null,
     main_ability: [],
     unique_ability_1: [],
     unique_ability_2: [],

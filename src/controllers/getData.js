@@ -16,7 +16,6 @@ const getById = async (table, column_id, id) => {
         throw error
     }
 };
-
 const getAll = async (table) => {
     try {
         const { data, error } = await supabase
@@ -24,12 +23,18 @@ const getAll = async (table) => {
             .select('*')
 
         if (error) {
-            throw error
+            throw error;
         }
-        return data
+
+        if (!data || data.length === 0) {
+            console.warn(`No hay datos en la tabla ${table}`);
+            return [];
+        }
+
+        return data;
     } catch (error) {
-        console.error('Error al obtener datos de Supabase:', error)
-        throw error
+        console.error('Error al obtener datos de Supabase:', error);
+        throw error;
     }
 }
 
