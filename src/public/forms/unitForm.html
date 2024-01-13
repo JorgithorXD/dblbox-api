@@ -110,6 +110,39 @@
                 <textarea name="awaken_card" cols="30" rows="5"></textarea>
             </section>
 
+            <h2>Zenkai</h2>
+            <label>Separar con ',' cada habilidad, nombre / habilidad, habilidad / habilidad</label>
+            <section class="zenkai">
+                <label for="zenkai_main">Habilidad Principal</label>
+                <textarea name="zenkai_main" cols="30" rows="5"></textarea>
+                <label for="zenkai_ability">Habilidad Zenkai</label>
+                <textarea name="zenkai_ability" cols="30" rows="5"></textarea>
+                <label for="zenkai_unique_1">Habilidad Unica 1</label>
+                <textarea name="zenkai_unique_1" cols="30" rows="5"></textarea>
+                <label for="zenkai_unique_2">Habilidad Unica 2</label>
+                <textarea name="zenkai_unique_2" cols="30" rows="5"></textarea>
+                <label for="zenkai_unique_1">Habilidad Unica 1</label>
+                <textarea name="zenkai_unique_3" cols="30" rows="5"></textarea>
+                <label for="zenkai_unique_2">Habilidad Unica 2</label>
+                <textarea name="zenkai_unique_4" cols="30" rows="5"></textarea>
+            </section>
+
+            <h2>Destrezas Zenkai</h2>
+            <label>Separar con ',' cada efecto, nombre / efecto</label>
+            <section class="arts">
+                <label for="zenkai_strike">Carta fisica</label>
+                <textarea name="zenkai_strike" cols="30" rows="5"></textarea>
+                <label for="zenkai_blast">Carta de energia</label>
+                <textarea name="zenkai_blast" cols="30" rows="5"></textarea>
+                <label for="zenkai_special_move">Tecnica especial</label>
+                <textarea name="zenkai_special_move" cols="30" rows="5"></textarea>
+                <label for="zenkai_special">Tecnica propia</label>
+                <textarea name="zenkai_special_art" cols="30" rows="5"></textarea>
+                <label for="zenkai_ultimate">Definitiva</label>
+                <textarea name="zenkai_ultimate" cols="30" rows="5"></textarea>
+                <label for="zenkai_awaken_card">Despertar</label>
+                <textarea name="zenkai_awaken_card" cols="30" rows="5"></textarea>
+            </section>
 
             <input type="submit" value="Enviar">
         </form>
@@ -188,7 +221,7 @@
         margin: 1rem auto;
     }
 
-    section.abilities, .arts {
+    section.abilities, .arts, .zenkai {
         display: flex;
         flex-direction: column;
     }
@@ -203,8 +236,9 @@
 
     input[type=submit] {
         width: 100%;
-        height: 3rem;
-        margin: 0 auto;
+        border: none;
+        height: 5rem;
+        margin: 1rem auto;
     }
 
     input:not(input[type=checkbox]),

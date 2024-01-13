@@ -54,9 +54,27 @@ router.post('/post/unit', async (req, res) => {
         unitModel.arts.ultimate = req.body.ultimate.split(',').map(m => m.trim())
         unitModel.arts.awaken = req.body.awaken_card.split(',').map(m => m.trim())
 
+        unitModel.unit_zenkai.id = req.body.unit_id
+        unitModel.unit_zenkai.main_ability = req.body.zenkai_main.split(',').map(m => m.trim())
+        unitModel.unit_zenkai.unique_ability_1 = req.body.zenkai_unique_1.split(',').map(m => m.trim())
+        unitModel.unit_zenkai.unique_ability_2 = req.body.zenkai_unique_2.split(',').map(m => m.trim())
+        unitModel.unit_zenkai.unique_ability_3 = req.body.zenkai_unique_3.split(',').map(m => m.trim())
+        unitModel.unit_zenkai.unique_ability_4 = req.body.zenkai_unique_4.split(',').map(m => m.trim())
+        unitModel.unit_zenkai.zenkai_ability = req.body.zenkai_ability.split(',').map(m => m.trim())
+
+        unitModel.arts_zenkai.id = req.body.unit_id
+        unitModel.arts_zenkai.strike = req.body.zenkai_strike.split(',').map(m => m.trim())
+        unitModel.arts_zenkai.blast = req.body.zenkai_blast.split(',').map(m => m.trim())
+        unitModel.arts_zenkai.special_move = req.body.zenkai_special_move.split(',').map(m => m.trim())
+        unitModel.arts_zenkai.special_art = req.body.zenkai_special_art.split(',').map(m => m.trim())
+        unitModel.arts_zenkai.ultimate = req.body.zenkai_ultimate.split(',').map(m => m.trim())
+        unitModel.arts_zenkai.awaken = req.body.zenkai_awaken_card.split(',').map(m => m.trim())
+
         await insertBasicUnit('unit_basic', unitModel.basic)
         await insertBasicUnit('unit_abilities', unitModel.abilities)
         await insertBasicUnit('unit_arts', unitModel.arts)
+        await insertBasicUnit('unit_zenkai', unitModel.unit_zenkai)
+        await insertBasicUnit('unit_arts_zenkai', unitModel.arts_zenkai)
 
         res.send('Datos recibidos correctamente.')
     } catch (error) {
