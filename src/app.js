@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
+import { supabase } from './database/supabase.js'
 import unitRoutes from './routes/unitRoutes.js'
 import unitRoutesEs from './routes/unitRoutesEs.js'
 import unitRoutesJp from './routes/unitRoutesJp.js'
@@ -8,6 +9,9 @@ import unitRoutesFr from './routes/unitRoutesFr.js'
 import dataRoutes from './routes/dataRoutes.js'
 import formDataRoutes from './routes/formDataRoutes.js'
 import formUnitRoutes from './routes/formUnitRoutes.js'
+import loginRoutes from './routes/loginRoutes.js'
+import authMiddleware from './services/middelware.js'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 dotenv.config()
@@ -17,19 +21,7 @@ const PORT = process.env.PORT ?? 4121
 app.listen(PORT, () => {
     console.log("server listening on https://localhost:" + PORT);
 })
-
-app.use(async function(req, res, next) {
-    const user = supabase.auth.user();
   
-    if (!user) {
-      // Si el usuario no está autenticado, redirige a la página de inicio de sesión
-      return res.redirect('/login');
-    } else {
-      // Si el usuario está autenticado, permite que la solicitud continúe
-      next();
-    }
-  });
-
 app.use((req, res, next) => {
     if (req.url === '/') {
         res.redirect(301, '/home')
@@ -38,14 +30,16 @@ app.use((req, res, next) => {
     }
 })
 
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('./public'))
 
-app.get('/home', (req, res) => {
+app.get('/home', authMiddleware, (req, res) => {
     res.send('<h1>Pagina principal</h1>')
 })
 
+app.use('/', loginRoutes)
 app.use('/en/unit', unitRoutes)
 app.use('/es/unit', unitRoutesEs)
 app.use('/jp/unit', unitRoutesJp)
