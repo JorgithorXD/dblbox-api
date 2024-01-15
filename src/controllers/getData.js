@@ -15,7 +15,8 @@ const getById = async (table, column_id, id) => {
         console.error('Error al obtener datos de Supabase:', error)
         throw error
     }
-};
+}
+
 const getAll = async (table) => {
     try {
         const { data, error } = await supabase

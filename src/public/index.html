@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBL-BOX</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>Bienvenido a DBL BOX</h1>
+        <h2>Una REST API sobre el videojuego para dispositivos moviles 'Dragon Ball Legends'</h2>
+    </header>
+    <main>
+        <h2>Algunas de las acciones que puedes realizar:</h2>
+        <article class="link-to-forms">
+            <ul>
+                <li><a href="/form/unit">Agregar una unidad</a></li>
+                <li><a href="/form/tags">Agregar un tag</a></li>
+            </ul>
+        </article>
+        <article class="link-to-get-data">
+            <ul>
+                <li><a href="/data/tags">Obtener todos las etiquetas</a></li>
+                <li><a href="/data/chapters">Obtener todos los capitulos <span class="clipboard"></span></a></li>
+                <li><a href="/data/colors">Obtener todos los colores <span class="clipboard"></span></a></li>
+                <li><a href="/data/types">Obtener todos los tipos <span class="clipboard"></span></a></li>
+                <li><a href="/data/raritys">Obtener todos las rarezas <span class="clipboard"></span></a></li>
+                <li><a href="en/unit/all">Obtener todos los personajes <span class="clipboard"></span></a></li>
+            </ul>
+        </article>
+    </main>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const articleGetData = document.querySelector('.link-to-get-data')
+        const $a = articleGetData.querySelectorAll('a')
+
+        var clicks = 0
+
+        $a.forEach((a, i) => {
+            clicks = 0
+            a.addEventListener('click', function (event) {
+                event.preventDefault()
+                clicks++
+                console.log(clicks);
+                setTimeout(() => {
+                    if (clicks === 1) {
+                        const url = this.getAttribute('href')
+                        copyToClipboard(url)
+                    }
+                    else {
+                        var go = this.getAttribute('href')
+                        window.location = go
+                    }
+                    clicks = 0
+                }, 1000)
+            })
+        })
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea')
+            textarea.value = 'https://dblbox-api.3.us-1.fl0.io' + text
+            document.body.appendChild(textarea)
+            textarea.select()
+            document.execCommand('copy')
+            document.body.removeChild(textarea)
+        }
+    }) 
+</script>
+
+</html>
