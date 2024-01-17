@@ -76,9 +76,9 @@ article.link-to-forms a {
 }
 
 article.link-to-get-data a {
-    color: rgb(0, 177, 68);
-    background: rgba(0, 255, 4, 0.2);
-    border-color: rgb(0, 189, 3);
+    color: rgb(130, 1, 113);
+    background: rgb(255, 186, 246);
+    border-color: rgb(203, 10, 177);
 }
 
 .hide {
@@ -86,11 +86,13 @@ article.link-to-get-data a {
 }
 
 .notification-container {
-    border: 2px #04ff00 solid;
-    background: white;
+    box-shadow:  2px 2px 5px 5px #04ff004f;
+    background:  #04ff00;
+    color: #014f00;
     width: calc(100% - 1rem);
     left: 0.5rem;
     height: 3.5rem;
+    border-radius: 5rem;
     opacity: 0;
     position: absolute;
     bottom: 0;
@@ -103,6 +105,7 @@ article.link-to-get-data a {
         width: 100%;
         padding: 0 0 0 1rem;
         font-size: 1.5rem;
+        text-align: center;
     }
 
     & span {
@@ -124,21 +127,21 @@ article.link-to-get-data a {
 
     50% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-3.5rem);
     }
 
     75% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-3.5rem);
     }
 
     90% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-3.5rem);
     }
 
     100% {
-        transform: translateY(-1rem);
+        transform: translateY(-4.5rem);
         opacity: 0.0;
     }
 }
