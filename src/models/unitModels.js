@@ -49,7 +49,7 @@ const unit_zenkai = {
     zenkai_ability: []
 }
 
-export const unitModel = {
+export const models = {
     basic,
     abilities,
     arts,
