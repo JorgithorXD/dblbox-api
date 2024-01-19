@@ -60,6 +60,7 @@ router.post('/post/unit', async (req, res) => {
         unitModel._basic.zenkai = req.body.zenkai
         unitModel._basic.is_ll = req.body.legends_limited
         unitModel._basic.awaken = req.body.awaken
+        unitModel._basic.unit_img.push(req.body.unit_images.split(',').map(m => m.trim()))
 
         if (!Array.isArray(unitModel._basic.unit_tag)) {
             unitModel._basic.unit_tag = [unitModel._basic.unit_tag];
