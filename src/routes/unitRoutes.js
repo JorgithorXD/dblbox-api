@@ -12,12 +12,13 @@ router.get('/all', async (req, res) => {
     const dataUnitZenkaiArts = await getData.getAll('unit_arts_zenkai')
 
     const unit = dataUnitBasic.map((basic) => {
-      const abilities = dataUnitAbilities.find((abilities) => abilities.id = basic.id)
-      const arts = dataUnitArts.find((arts) => arts.id = basic.id)
-      const zenkai = dataUnitZenkai.find((zenkai) => zenkai.id = basic.id)
-      const zenkaiArts = dataUnitZenkaiArts.find((zenkaiArts) => zenkaiArts.id = basic.id)
+      const abilities = dataUnitAbilities.find((abilities) => abilities.id === basic.id)
+      const arts = dataUnitArts.find((arts) => arts.id === basic.id)
+      const zenkai = dataUnitZenkai.find((zenkai) => zenkai.id === basic.id)
+      const zenkaiArts = dataUnitZenkaiArts.find((zenkaiArts) => zenkaiArts.id === basic.id)
 
       return {
+        basic: {
         id: basic.id,
         unit_name: basic.unit_name,
         unit_type: basic.unit_type,
@@ -32,6 +33,7 @@ router.get('/all', async (req, res) => {
         has_zenkai: basic.zenkai,
         is_ll: basic.legends_limited,
         has_awaken: basic.awaken,
+        },
         abilities: {
           main_ability: abilities.main_ability,
           ultra_ability: abilities.ultra_ability,
