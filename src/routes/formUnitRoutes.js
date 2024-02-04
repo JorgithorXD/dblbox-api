@@ -4,7 +4,6 @@ import { dirname, join } from 'path'
 import { insertBasicUnit, updateData } from "../controllers/postTo.js"
 import { deleteUnit } from "../controllers/delData.js"
 import { models } from "../models/unitModels.js"
-import { fetchData } from "../scrapp.js"
 import _ from 'lodash'
 
 const router = express.Router()
