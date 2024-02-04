@@ -13,6 +13,23 @@ const insertBasicUnit = async (table, data) => {
     console.log('Unit inserted successfully:', result);
 }
 
+const updateData = async (table, id, data) => {
+    const { result, error } = await supabase
+        .from(table)
+        .upsert(
+            [{ id, ...data }],
+            { onConflict: ['id'] }
+        );
+
+    if (error) {
+        console.error('Error updating data:', error.message);
+        return;
+    }
+
+    console.log('Data updated successfully:', result);
+};
+
 export {
-    insertBasicUnit
+    insertBasicUnit,
+    updateData
 }

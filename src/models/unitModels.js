@@ -6,7 +6,6 @@ const basic = {
     unit_color: [],
     unit_tag: [],
     unit_chapter: null,
-    unit_img: [],
     tag_switch: null,
     revival: null,
     transformable: null,
@@ -14,6 +13,12 @@ const basic = {
     is_ll: null,
     awaken: null
 }
+
+const basicTranslate = {
+    id: null,
+    unit_name: []
+}
+
 
 const abilities = {
     id: null,
@@ -49,10 +54,22 @@ const unit_zenkai = {
     zenkai_ability: []
 }
 
+const unit_src = {
+    id: null,
+    img: []
+}
+
+const unit_src_img = {
+    img: []
+}
+
 export const models = {
     basic,
     abilities,
     arts,
     arts_zenkai,
-    unit_zenkai
+    unit_zenkai,
+    unit_src,
+    unit_src_img,
+    basicTranslate
 }

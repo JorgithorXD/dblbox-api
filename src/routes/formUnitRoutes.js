@@ -1,9 +1,10 @@
 import express from "express"
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-import { insertBasicUnit } from "../controllers/postTo.js"
+import { insertBasicUnit, updateData } from "../controllers/postTo.js"
 import { deleteUnit } from "../controllers/delData.js"
 import { models } from "../models/unitModels.js"
+import { fetchData } from "../scrapp.js"
 import _ from 'lodash'
 
 const router = express.Router()
@@ -12,6 +13,10 @@ const __dirname = dirname(__filename)
 
 router.get('/unit', (req, res) => {
     res.sendFile(join(__dirname, '../public/forms/unitForm.html'))
+})
+
+router.get('/unit/src', (req, res) => {
+    res.sendFile(join(__dirname, '../public/forms/unitSrcForm.html'))
 })
 
 router.delete('/delete/unit', async (req, res) => {
@@ -31,6 +36,32 @@ router.delete('/delete/unit', async (req, res) => {
     }
 })
 
+router.post('/post/unit/img', async (req, res) => {
+    try {
+        const { id, unit_img1, unit_img2, unit_img3, unit_img4 } = req.body
+
+        var img1 = [], img2 = []
+
+        const unitModel = {
+            _src: _.cloneDeep(models.unit_src_img)
+        }
+
+        img1.push(unit_img1)
+        img1.push(unit_img2)
+        img1.push(unit_img3)
+        img1.push(unit_img4)
+
+        unitModel._src.img = img1
+
+        updateData('unit_src', id, unitModel._src)
+
+        res.redirect('/form/unit/src')
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 router.post('/post/unit', async (req, res) => {
     try {
         const unitModel = {
@@ -38,9 +69,9 @@ router.post('/post/unit', async (req, res) => {
             _abilities: _.cloneDeep(models.abilities),
             _arts: _.cloneDeep(models.arts),
             _arts_zenkai: _.cloneDeep(models.arts_zenkai),
-            _unit_zenkai: _.cloneDeep(models.unit_zenkai)
+            _unit_zenkai: _.cloneDeep(models.unit_zenkai),
+            _unit_src: _.cloneDeep(models.unit_src)
         }
-
         unitModel._basic.id = req.body.unit_id
         unitModel._basic.unit_name.push(req.body.unit_name)
         if (req.body.second_unit_name != "" && req.body.second_unit_name != undefined && req.body.second_unit_name != null) {
