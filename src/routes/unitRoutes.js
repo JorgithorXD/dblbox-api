@@ -79,25 +79,28 @@ router.get('/all', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const unitId = req.params.id
+    const unitId = req.params.id.toUpperCase()
+
     const [dataUnitBasic] = await getData.getById('unit_basic', 'id', unitId)
     const [dataUnitAbilities] = await getData.getById('unit_abilities', 'id', unitId)
     const [dataUnitArts] = await getData.getById('unit_arts', 'id', unitId)
     const [dataUnitZenkai] = await getData.getById('unit_zenkai', 'id', unitId)
     const [dataUnitZenkaiArts] = await getData.getById('unit_arts_zenkai', 'id', unitId)
+    const [dataSrc] = await getData.getById('unit_src', 'id', unitId)
 
     if (!dataUnitBasic) {
       res.status(404).json({ error: 'No se encontró la unidad con el ID proporcionado' })
     } else {
+      var color = dataUnitBasic.unit_color[0]
       const unit = {
         id: dataUnitBasic.id,
         unit_name: dataUnitBasic.unit_name,
         unit_type: dataUnitBasic.unit_type,
         unit_rarity: dataUnitBasic.unit_rarity,
-        unit_color: dataUnitBasic.unit_color,
+        unit_color: color,
         unit_tag: dataUnitBasic.unit_tag,
         unit_chapter: dataUnitBasic.unit_chapter,
-        unit_img: dataUnitBasic.unit_img,
+        unit_img: dataSrc.img,
         is_tag_switch: dataUnitBasic.tag_switch,
         is_revival: dataUnitBasic.revival,
         is_transformable: dataUnitBasic.transformable,

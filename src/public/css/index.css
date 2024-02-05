@@ -53,8 +53,9 @@ ul {
         margin: 0 auto;
         flex-grow: 1;
         display: flex;
-        width: 94%;
+        width: 95%;
         padding: 0.5rem 0.75rem;
+        margin: 0 auto;
         border: 3px solid black;
         justify-content: space-between;
         border-radius: 4px;
@@ -65,7 +66,7 @@ ul {
             color: #ffffff;
             align-items: center;
             justify-content: space-between;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-decoration: none;
         }
 
@@ -112,8 +113,7 @@ article.link-to-get-data li a {
     width: calc(100% - 50rem);
     height: 3.5rem;
     opacity: 0;
-    position: absolute;
-    bottom: 0;
+    position: fixed;
     right: 0.5rem;
     animation: notificate 3s;
     display: flex;
@@ -141,26 +141,16 @@ article.link-to-get-data li a {
 @keyframes notificate {
     0% {
         opacity: 0;
-        transform: translateY(7rem);
+        bottom: -5rem;
     }
 
     50% {
         opacity: 1;
-        transform: translateY(0rem);
-    }
-
-    75% {
-        opacity: 1;
-        transform: translateY(0rem);
-    }
-
-    90% {
-        opacity: 1;
-        transform: translateY(0rem);
+        bottom: 0rem;
     }
 
     100% {
-        transform: translateY(0rem);
+        bottom: 1rem;
         opacity: 0.0;
     }
 }

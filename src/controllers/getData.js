@@ -22,6 +22,7 @@ const getAll = async (table) => {
         const { data, error } = await supabase
             .from(table)
             .select('*')
+            .order('id')
 
         if (error) {
             throw error;

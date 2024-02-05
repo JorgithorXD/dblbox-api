@@ -1,21 +1,97 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Src Form</title>
 </head>
+
 <body>
+    <h1>Formulario para subir las imagenes de los personajes</h1>
     <form action="/form/post/unit/img" method="post">
-        <label>Id del personaje</label>
-        <input type="text" name="id">
+        <label>ID del personaje:</label>
+        <select name='id' class="id-selector">
+            <option hidden>ID del personaje</option>
+        </select>
 
         <input type="text" name="unit_img1" placeholder="Imagen 1">
-        <input type="text" name="unit_img2" placeholder="Imagen 2">
-        <input type="text" name="unit_img3" placeholder="Imagen 3">
-        <input type="text" name="unit_img4" placeholder="Imagen 4">
+        <input type="text" name="unit_img2" placeholder="Imagen 2 (Opcional)">
+        <input type="text" name="unit_img3" placeholder="Imagen 3 (Opcional)">
+        <input type="text" name="unit_img4" placeholder="Imagen 4 (Opcional)">
 
         <input type="submit" value="Enviar">
     </form>
 </body>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        width: 100dvw;
+        height: 100dvh;
+        overflow-x: hidden;
+
+        & h1 {
+            width: 96%;
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 5rem auto .5rem auto ;
+        }
+    }
+
+    form {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        margin: 1.25rem auto;
+        gap: 0.5rem; 
+        border: 2px black dashed;
+
+        & label {
+            color: black;
+            width: 90%;
+            margin: 1rem auto 0 auto;
+        }
+
+        & select, input {
+            width: 90%;
+            margin: 0 auto;
+            height: 2rem;
+            padding-left: 4px;
+        }
+
+        & input[type=submit] {
+            margin: 2rem auto 1rem auto;
+            border-radius: 4px;
+            border: none;
+            background: #ccc;
+        }
+    }
+</style>
+
+<script>
+    const $id = document.querySelector('.id-selector')
+    fetch('/en/unit/all')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(unit => {
+                const option = document.createElement('option')
+                option.value = unit.basic.id
+                option.text = unit.basic.id
+                $id.appendChild(option)
+            })
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error)
+        })
+</script>
+
 </html>
