@@ -21,10 +21,6 @@ const PORT = process.env.PORT ?? 4121
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-app.listen(PORT, () => {
-    console.log('server listening on https://localhost:' + PORT)
-})
-
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -51,4 +47,8 @@ app.use('/form', authMiddleware, formUnitRoutes)
 
 app.use((req, res, next) => {
     res.status(404).sendFile(join(__dirname, './public/404.html'));
+})
+
+app.listen(PORT, () => {
+    console.log('server listening on https://localhost:' + PORT)
 })
