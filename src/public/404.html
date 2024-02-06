@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ups... Hubo un error</title>
+    <link rel="stylesheet" href="./css/404.css">
+</head>
+
+<body>
+    <h1>Lo sentimos, la pagina que buscabas no existe.</h1>
+    <main>
+
+        <h2>Seras redireccionado a la pagina principal en:</h2>
+        <h3><span class="countdown">5</span></h3>
+    </main>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let countdownValue = 5
+        const $countdown = document.querySelector('.countdown')
+
+        function updateCountdown() {
+            $countdown.textContent = countdownValue;
+        }
+
+        function startCountdown() {
+            const countdownInterval = setInterval(function () {
+                updateCountdown()
+
+                if (countdownValue === 0) {
+                    window.location.href = '/'
+                    clearInterval(countdownInterval)
+                } else {
+                    countdownValue--;
+                }
+            }, 1000)
+        }
+        startCountdown();
+    });
+</script>
+
+</html>
