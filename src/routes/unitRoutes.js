@@ -18,23 +18,23 @@ router.get('/all', async (req, res) => {
       const zenkai = dataUnitZenkai.find((zenkai) => zenkai.id === basic.id)
       const zenkaiArts = dataUnitZenkaiArts.find((zenkaiArts) => zenkaiArts.id === basic.id)
       const src = dataUnitSrc.find((src) => src.id === basic.id)
-
+      var color = dataUnitBasic.unit_color[0]
       return {
         basic: {
-        id: basic.id,
-        unit_name: basic.unit_name,
-        unit_type: basic.unit_type,
-        unit_rarity: basic.unit_rarity,
-        unit_color: basic.unit_color,
-        unit_tag: basic.unit_tag,
-        unit_chapter: basic.unit_chapter,
-        unit_img: src.img,
-        is_tag_switch: basic.tag_switch,
-        is_revival: basic.revival,
-        is_transformable: basic.transformable,
-        has_zenkai: basic.zenkai,
-        is_ll: basic.is_ll,
-        has_awaken: basic.awaken,
+          id: basic.id,
+          unit_name: basic.unit_name,
+          unit_type: basic.unit_type,
+          unit_rarity: basic.unit_rarity,
+          unit_color: color,
+          unit_tag: basic.unit_tag,
+          unit_chapter: basic.unit_chapter,
+          unit_img: src.img,
+          is_tag_switch: basic.tag_switch,
+          is_revival: basic.revival,
+          is_transformable: basic.transformable,
+          has_zenkai: basic.zenkai,
+          is_ll: basic.is_ll,
+          has_awaken: basic.awaken,
         },
         abilities: {
           main_ability: abilities.main_ability,
@@ -146,6 +146,40 @@ router.get('/:id', async (req, res) => {
     console.log(error);
   }
 
+})
+
+router.get('/all/basic', async (req, res) => {
+  try {
+    const basicData = await getData.getAll('unit_basic')
+    const dataSrc = await getData.getAll('unit_src')
+
+    const unit = basicData.map((basic) => {
+      const src = dataSrc.find((src) => src.id === basic.id)
+
+      return {
+        basic: {
+          id: basic.id,
+          unit_name: basic.unit_name,
+          unit_type: basic.unit_type,
+          unit_rarity: basic.unit_rarity,
+          unit_color: basic.unit_color,
+          unit_tag: basic.unit_tag,
+          unit_chapter: basic.unit_chapter,
+          unit_img: src.img,
+          is_tag_switch: basic.tag_switch,
+          is_revival: basic.revival,
+          is_transformable: basic.transformable,
+          has_zenkai: basic.zenkai,
+          is_ll: basic.is_ll,
+          has_awaken: basic.awaken,
+        }
+      }
+    })
+    res.status(200).json(unit)
+
+  } catch (error) {
+    console.log(error);
+  }
 })
 
 export default router
