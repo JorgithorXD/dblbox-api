@@ -18,7 +18,7 @@ router.get('/all', async (req, res) => {
       const zenkai = dataUnitZenkai.find((zenkai) => zenkai.id === basic.id)
       const zenkaiArts = dataUnitZenkaiArts.find((zenkaiArts) => zenkaiArts.id === basic.id)
       const src = dataUnitSrc.find((src) => src.id === basic.id)
-      var color = dataUnitBasic.unit_color[0]
+      var color = basic.unit_color[0]
       return {
         basic: {
           id: basic.id,
