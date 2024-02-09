@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/tags', async (req, res) => {
   try {
-    const data = await getData.getAll('data_tags')
+    const data = await getData.getAllData('data_tags')
     res.status(200).json(data)
   } catch (error) {
     console.error('Error al obtener datos de Supabase:', error);
@@ -26,7 +26,7 @@ router.get('/tags/:id', async (req, res) => {
 
 router.get('/chapters', async (req, res) => {
   try {
-    const data = await getData.getAll('data_chapters')
+    const data = await getData.getAllData('data_chapters')
     res.status(200).json(data)
   } catch (error) {
     console.error('Error al obtener datos de Supabase:', error);
@@ -47,7 +47,7 @@ router.get('/chapters/:id', async (req, res) => {
 
 router.get('/colors', async (req, res) => {
   try {
-    const data = await getData.getAll('data_colors')
+    const data = await getData.getAllData('data_colors')
     res.status(200).json(data)
   } catch (error) {
     console.error('Error al obtener datos de Supabase:', error);
@@ -68,7 +68,7 @@ router.get('/colors/:id', async (req, res) => {
 
 router.get('/raritys', async (req, res) => {
   try {
-    const data = await getData.getAll('data_rarity')
+    const data = await getData.getAllData('data_rarity')
     res.status(200).json(data)
   } catch (error) {
     console.error('Error al obtener datos de Supabase:', error);
@@ -89,7 +89,7 @@ router.get('/raritys/:id', async (req, res) => {
 
 router.get('/types', async (req, res) => {
   try {
-    const data = await getData.getAll('data_type')
+    const data = await getData.getAllData('data_type')
     res.status(200).json(data)
   } catch (error) {
     console.error('Error al obtener datos de Supabase:', error);
